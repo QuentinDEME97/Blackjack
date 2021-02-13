@@ -1,16 +1,38 @@
-# This is a sample Python script.
+import pygame
+from src.model.Cardgame import CardGame
+from src.view.View import View
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+def blackjack():
+    deck = CardGame().createDeck()
+    deck.shuffle()
+    print(deck.cards[0])
 
+    pygame.init()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+    maxForce = 0.2
+
+    FPS = 10
+    fpsClock = pygame.time.Clock()
+    font = pygame.font.Font(None, 30)
+
+    view = View(1280, 720, fpsClock, font)
+
+    #controller = Controller(screen, model)
+    #screen.setController(controller)
+    # screen.update()
+    running = True
+    while (running):
+        view.update(deck)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        print(pygame.mouse.get_pos())
+        fpsClock.tick(FPS)
+
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    blackjack()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
